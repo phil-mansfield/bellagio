@@ -13,7 +13,7 @@ let rec find g n =
   if g.ids.(n) = n then n
   else
     let group_id = find g n in
-    let _ = g.ids.(n) <- group_id in
+    g.ids.(n) <- group_id;
     group_id
     
 let group_ids g =
@@ -25,5 +25,4 @@ let group g id =
 let group_edges g id =
   raise (Failure "Not Yet Implemented")
     
-let group_size g id =
-  raise (Failure "Not Yet Implemented")
+let group_size g id = g.sizes.(id)
