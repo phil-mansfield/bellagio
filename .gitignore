@@ -1,3 +1,6 @@
 # Ignore object files.
 *.cmo
 *.cmi
+
+# ignore binaries
+a.out

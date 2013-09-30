@@ -1,14 +1,20 @@
-type 'a group_record = {ids : int Array.array;
-                        sizes : int Array.array}
+open Array
+
+type group_record = {ids : int array;
+                     sizes : int array}
 type node = int
 type edge = node * node
 type group_id = int
       
 let union max_node edges =
-  let ids = Array.init max_node (fn x -> x)
-    
-let find g = 
   raise (Failure "Not Yet Implemented")
+    
+let rec find g n = 
+  if g.ids.(n) = n then n
+  else
+    let group_id = find g n in
+    let _ = g.ids.(n) <- group_id in
+    group_id
     
 let group_ids g =
   raise (Failure "Not Yet Implemented")
