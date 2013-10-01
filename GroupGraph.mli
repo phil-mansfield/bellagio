@@ -9,5 +9,4 @@ val find : group_record -> node -> group_id
 val group_ids : group_record -> group_id list
 
 val group : group_record -> group_id -> node list
-val group_edges : group_record -> group_id -> edge list
 val group_size : group_record -> group_id -> int
