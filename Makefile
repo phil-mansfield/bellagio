@@ -1,22 +1,45 @@
+CC=ocamlc
+
 all: run-tests
 
-Utils.cmi: Utils.mli
-	ocamlc -c Utils.mli
+Signatures.cmo: Signatures.ml
+	$(CC) -c Signatures.ml
 
-Utils.cmo: Utils.ml
-	ocamlc -c Utils.ml
+Utils.cmi: Signatures.ml Utils.mli
+	$(CC) -c Utils.mli
 
-GroupGraph.cmi: GroupGraph.mli
-	ocamlc -c GroupGraph.mli
+Utils.cmo: Utils.cmi Utils.ml
+	$(CC) -c Utils.ml
 
-GroupGraph.cmo: GroupGraph.ml Utils.mli
-	ocamlc -c GroupGraph.ml
+Grouper.cmi: Signatures.ml Grouper.mli
+	$(CC) -c Grouper.mli
 
-Test.cmo: Test.ml GroupGraph.mli
-	ocamlc -c Test.ml
+Grouper.cmo: Utils.cmi Grouper.cmi Grouper.ml
+	$(CC) -c Grouper.ml
 
-run-tests: Utils.cmo GroupGraph.cmo Test.cmo
-	ocamlc -o run-tests Utils.cmo GroupGraph.cmo Test.cmo
+Grid.cmi: Signatures.ml Grid.mli
+	$(CC) -c Grid.mli
+
+Grid.cmo: Grid.cmi Grid.ml
+	$(CC) -c Grid.ml
+
+Histogram.cmi: Signatures.ml Histogram.mli
+	$(CC) -c Histogram.mli
+
+Histogram.cmo: Histogram.cmi Histogram.ml
+	$(CC) -c Histogram.ml
+
+MCarlo.cmi: Signatures.ml MCarlo.mli
+	$(CC) -c MCarlo.mli
+
+MCarlo.cmo: MCarlo.cmi MCarlo.ml
+	$(CC) -c MCarlo.ml
+
+Test.cmo: Test.ml Grouper.cmi
+	$(CC) -c Test.ml
+
+run-tests: Makefile Signatures.cmo Utils.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Test.cmo
+	$(CC) -o run-tests Signatures.cmo Utils.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Test.cmo
 
 clean:
 	rm run-tests *.cmo *.cmi

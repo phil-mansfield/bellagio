@@ -1,0 +1,1 @@
+module ArrayHistogram : Signatures.HISTOGRAM
