@@ -42,7 +42,7 @@ struct
     | CheckerboardSweep -> raise (failwith "Not Yet Implemented")
     | RandomSweep -> raise (failwith "Not Yet Implemented")
 
-  (* HATERS GONNA HATE: *)
+  (* HATERS GONNA HATE *)
   let fold order f x g =
     match order with
       SequentialSweep -> Array.fold_left f x g.xs
@@ -51,10 +51,8 @@ struct
 
   let print g print_f =
     let print_cell i elem = 
-      if i mod g.width = 0 then print_string "[";
-      if (i + 1) mod g.width = 0 then (print_f elem; print_endline "]") 
+      if i mod g.width = 0 then print_string "[ ";
+      if (i + 1) mod g.width = 0 then (print_f elem; print_endline " ]") 
       else print_f elem in
-    print_string "[";
     iteri print_cell g.xs;
-    print_endline "]"
 end
