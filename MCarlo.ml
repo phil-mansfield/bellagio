@@ -1,11 +1,24 @@
 open Signatures
+open Grouper
+open Grid
+
+module G = FlatGrid
+module Gr = UncompressedGrouper
+
+let generate_edges (g : bool G.grid) : (int * int) list = 
+  let add_edge edges c1 c2 = 
+    (G.int_of_coord g c1, G.int_of_coord g c2) :: edges in
+  let add_edges edges c site =
+    let right_c, down_c = G.right g c, G.down g c in 
+    let right_site, down_site = G.get g right_c, G.get g down_c in
+    let edges' = if right_site = site then add_edge edges right_c c else edges in
+    if down_site = site then add_edge edges' down_c c else edges' in
+  G.foldi add_edges [] g
 
 (* TODO: increase code reuse. *)
 
 module MakeSwendsenWang = functor (Hist : HISTOGRAM) ->
 struct
-  module G = Grid.FlatGrid
-
   type site = bool
   type lattice = { g : site G.grid;
                    mutable temp : float;
@@ -52,7 +65,8 @@ struct
   let magnetization lat = lat.mag
     
   let max_cluster_size lat = 
-    failwith "Not Yet Implemented"
+    let record = Gr.union (site_count lat) (generate_edges lat.g) in
+    Gr.group_size record (Gr.largest_group record)
       
   let create_histograms lat sweeps =
     let e_hist = Hist.init (-4.0 *. (float (site_count lat))) 
@@ -72,8 +86,6 @@ end
 
 module MakeMetropolis = functor (Hist : HISTOGRAM) ->
 struct
-  module G = Grid.FlatGrid
-
   type site = bool
   type lattice = { g : site G.grid;
                    mutable temp : float;
@@ -93,7 +105,6 @@ struct
      mag = 1.0 *. (float (width * width))}
 
   let site_count lat = (G.width lat.g) * (G.height lat.g)
-
 
   let site_energy lat coord = 
     let self_m = int_mag lat.g coord in
@@ -121,7 +132,8 @@ struct
   let magnetization lat = lat.mag
 
   let max_cluster_size lat = 
-    failwith "Not Yet Implemented"
+    let record = Gr.union (site_count lat) (generate_edges lat.g) in
+    Gr.group_size record (Gr.largest_group record)
     
   let create_histograms lat sweeps =
     let e_hist = Hist.init (-4.0 *. (float (site_count lat))) 

@@ -12,6 +12,8 @@ struct
                    mutable xs : 'a array }
 
   type iter_order = SequentialSweep | CheckerboardSweep | RandomSweep
+
+  let int_of_coord g (x, y) = (y - g.y0) * g.width + (x - g.x0)
       
   let width g = g.width
   let height g = g.height
@@ -42,12 +44,13 @@ struct
     | CheckerboardSweep -> raise (failwith "Not Yet Implemented")
     | RandomSweep -> raise (failwith "Not Yet Implemented")
 
+  let fold f x g = Array.fold_left f x g.xs
+
   (* HATERS GONNA HATE *)
-  let fold order f x g =
-    match order with
-      SequentialSweep -> Array.fold_left f x g.xs
-    | CheckerboardSweep -> raise (failwith "Not Yet Implemented")
-    | RandomSweep -> raise (failwith "Not Yet Implemented")
+  let foldi (f : 'a -> coord -> 'b -> 'a) (x : 'a) (g : 'b grid) : 'a =
+    let sum = ref x in
+    iter SequentialSweep (fun c elem -> sum := f !sum c elem) g;
+    !sum
 
   let print g print_f =
     let print_cell i elem = 

@@ -5,6 +5,8 @@ sig
 
   type iter_order = SequentialSweep | CheckerboardSweep | RandomSweep
       
+  val int_of_coord : 'a grid -> coord -> int
+
   val width : 'a grid -> int
   val height : 'a grid -> int
     
@@ -15,7 +17,8 @@ sig
   val init : coord -> coord -> (coord -> 'a) -> 'a grid
     
   val iter : iter_order -> (coord -> 'a -> unit) -> 'a grid -> unit
-  val fold : iter_order -> ('a -> 'b -> 'a) -> 'a -> 'b grid -> 'a
+  val fold : ('a -> 'b -> 'a) -> 'a -> 'b grid -> 'a
+  val foldi : ('a -> coord -> 'b -> 'a) -> 'a  -> 'b grid -> 'a
 
   val print : 'a grid -> ('a -> unit) -> unit
 
@@ -36,9 +39,11 @@ sig
     
   val find : group_record -> node -> group_id
   val group_ids : group_record -> group_id list
-    
+  
   val group : group_record -> group_id -> node list
   val group_size : group_record -> group_id -> int
+    
+  val largest_group : group_record -> group_id
 end
 
 module type HISTOGRAM =
