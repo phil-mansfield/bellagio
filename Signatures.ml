@@ -6,6 +6,7 @@ sig
   type iter_order = SequentialSweep | CheckerboardSweep | RandomSweep
       
   val int_of_coord : 'a grid -> coord -> int
+  val coord_of_int : 'a grid -> int -> coord
 
   val width : 'a grid -> int
   val height : 'a grid -> int

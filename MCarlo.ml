@@ -47,16 +47,17 @@ struct
     let down_m = int_mag lat.g (G.down lat.g coord) in
     -1.0 *. (float (self_m * (up_m + down_m + left_m + right_m)))
 
-  let update_site lat coord _ =
-    let d_e = -2.0 *. (site_energy lat coord) in
-    (* TODO: optimize this calculation *)
-    if d_e < 0. || Random.float 1. < exp (d_e /. lat.temp) then begin
-      G.set lat.g coord (not (G.get lat.g coord));
-      lat.energy <- lat.energy +. d_e;
-      lat.mag <- lat.mag -. 2.0 *. (float_mag lat.g coord)
-    end
+  let set_rand_mag lat nodes =
+    let site_type = Random.bool () in
+    let coords = List.map (G.coord_of_int lat.g) nodes in
+    List.iter (fun coord -> G.set lat.g coord site_type) coords
 
-  let sweep lat = G.iter G.SequentialSweep (update_site lat) lat.g
+  let sweep lat =
+    let prob = 1.0 -. exp(-1.0 /. lat.temp) in
+    let edges = generate_edges lat.g in
+    let edges' = List.filter (fun _ -> Random.float 1.0 > prob) edges in
+    let gr = Gr.union (site_count lat) edges' in
+    List.iter (set_rand_mag lat) (List.map (Gr.group gr) (Gr.group_ids gr))
 
   let set_temp lat temp = lat.temp <- temp
 
@@ -67,7 +68,7 @@ struct
   let max_cluster_size lat = 
     let record = Gr.union (site_count lat) (generate_edges lat.g) in
     Gr.group_size record (Gr.largest_group record)
-      
+
   let create_histograms lat sweeps =
     let e_hist = Hist.init (-4.0 *. (float (site_count lat))) 
       4.0 (1 + 2 * site_count lat) in 

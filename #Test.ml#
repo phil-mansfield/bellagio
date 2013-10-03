@@ -1,3 +1,6 @@
 open MCarlo
 
 module Metro = MakeMetropolis(ArrayHistogram : HISTOGRAM)
+
+lat = Metro.Init 4
+Metro.set_temp 5.0

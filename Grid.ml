@@ -14,7 +14,8 @@ struct
   type iter_order = SequentialSweep | CheckerboardSweep | RandomSweep
 
   let int_of_coord g (x, y) = (y - g.y0) * g.width + (x - g.x0)
-      
+  let coord_of_int g i = (g.x0 + i mod g.width, g.y0 + i / g.width)      
+
   let width g = g.width
   let height g = g.height
 
@@ -25,20 +26,18 @@ struct
   let left g (x, y) = ((if x = g.x0 then g.x1 else x - 1), y)
   let up g (x, y) = (x, if y = g.y0 then g.y1 else y - 1)
   let down g (x, y) = (x, if y = g.y1 then g.y0 else y + 1)
-
-  let coord_from_i g i = (g.x0 + i mod g.width, g.y0 + i / g.width)
     
   let init (lo_x, lo_y) (hi_x, hi_y) (f : coord -> 'a) =
     let g = { width = hi_x - lo_x; height = hi_y - lo_y;
               x0 = lo_x; y0 = lo_y; x1 = hi_x; y1 = hi_y;
               xs = Array.make 0 (f (lo_x, lo_y))} in
-    g.xs <- Array.init (g.width * g.height) (fun i -> f (coord_from_i g i));
+    g.xs <- Array.init (g.width * g.height) (fun i -> f (coord_of_int g i));
     g
 
   let make lo_coord hi_coord elem = init lo_coord hi_coord (fun _ -> elem)
 
   let iter order f g =
-    let idx_f i = f (coord_from_i g i) in
+    let idx_f i = f (coord_of_int g i) in
     match order with
       SequentialSweep -> Array.iteri idx_f g.xs
     | CheckerboardSweep -> raise (failwith "Not Yet Implemented")
