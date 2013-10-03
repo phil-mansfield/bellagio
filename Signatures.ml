@@ -70,7 +70,7 @@ sig
   val magnetization : lattice -> float
   val max_cluster_size : lattice -> int
     
-  val create_histogram : lattice -> int -> histogram
+  val create_histograms : lattice -> int -> (histogram * histogram)
 
   val print : lattice -> unit
 end

@@ -1,5 +1,7 @@
 open Signatures
 
+(* TODO: increase code reuse. *)
+
 module MakeSwendsenWang = functor (Hist : HISTOGRAM) ->
 struct
   module G = Grid.FlatGrid
@@ -23,7 +25,6 @@ struct
      mag = 1.0 *. (float (width * width))}
 
   let site_count lat = (G.width lat.g) * (G.height lat.g)
-
 
   let site_energy lat coord = 
     let self_m = int_mag lat.g coord in
@@ -49,13 +50,22 @@ struct
   let energy lat = lat.energy
 
   let magnetization lat = lat.mag
-
+    
   let max_cluster_size lat = 
     failwith "Not Yet Implemented"
-    
-  let create_histogram lat sweeps =
-    failwith "Not Yet Implemented"
-
+      
+  let create_histograms lat sweeps =
+    let e_hist = Hist.init (-4.0 *. (float (site_count lat))) 
+      4.0 (1 + 2 * site_count lat) in 
+    let m_hist = Hist.init (-1.0 *. (float (site_count lat))) 
+      1.0 (1 + 2 * site_count lat) in 
+    for sweep_num = 1 to sweeps do 
+      sweep lat;
+      Hist.add e_hist lat.energy;
+      Hist.add m_hist lat.mag;
+    done;
+    (e_hist, m_hist)
+      
   let print lat = 
     G.print lat.g (fun s -> if s then print_string "+" else print_string "-")
 end
@@ -113,8 +123,17 @@ struct
   let max_cluster_size lat = 
     failwith "Not Yet Implemented"
     
-  let create_histogram lat sweeps =
-    failwith "Not Yet Implemented"
+  let create_histograms lat sweeps =
+    let e_hist = Hist.init (-4.0 *. (float (site_count lat))) 
+      4.0 (1 + 2 * site_count lat) in 
+    let m_hist = Hist.init (-1.0 *. (float (site_count lat))) 
+      1.0 (1 + 2 * site_count lat) in 
+    for sweep_num = 1 to sweeps do 
+      sweep lat;
+      Hist.add e_hist lat.energy;
+      Hist.add m_hist lat.mag;
+    done;
+    (e_hist, m_hist)
 
   let print lat = 
     G.print lat.g (fun s -> if s then print_string "+" else print_string "-")
