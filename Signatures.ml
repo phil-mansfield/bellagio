@@ -17,6 +17,8 @@ sig
   val iter : iter_order -> (coord -> 'a -> unit) -> 'a grid -> unit
   val fold : iter_order -> ('a -> 'b -> 'a) -> 'a -> 'b grid -> 'a
 
+  val print : 'a grid -> ('a -> unit) -> unit
+
   val right : 'a grid -> coord -> coord
   val left : 'a grid -> coord -> coord
   val up : 'a grid -> coord -> coord
@@ -58,10 +60,11 @@ sig
   type lattice
   type histogram
 
-  val init : int -> float -> lattice
+  val init : int -> lattice
+  val site_count : lattice -> int
 
   val sweep : lattice -> unit
-  val set_temp : lattice -> unit
+  val set_temp : lattice -> float -> unit
 
   val energy : lattice -> float
   val magnetization : lattice -> float
@@ -73,4 +76,4 @@ sig
 end
 
 module type MCARLO_FUNCTOR = functor (Hist : HISTOGRAM) ->
-  MCARLO with type histogram = Hist.histogram
+    MCARLO with type histogram = Hist.histogram

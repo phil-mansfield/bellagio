@@ -1,6 +1,7 @@
 open Array
+open Signatures
 
-module FlatGrid = 
+module FlatGrid : GRID = 
 struct
   type coord = int * int
 
@@ -47,4 +48,13 @@ struct
       SequentialSweep -> Array.fold_left f x g.xs
     | CheckerboardSweep -> raise (failwith "Not Yet Implemented")
     | RandomSweep -> raise (failwith "Not Yet Implemented")
+
+  let print g print_f =
+    let print_cell i elem = 
+      if i mod g.width = 0 then print_string "[";
+      if (i + 1) mod g.width = 0 then (print_f elem; print_endline "]") 
+      else print_f elem in
+    print_string "[";
+    iteri print_cell g.xs;
+    print_endline "]"
 end
