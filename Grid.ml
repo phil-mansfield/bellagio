@@ -19,7 +19,8 @@ struct
   let width g = g.width
   let height g = g.height
 
-  let get g (x, y) = g.xs.((x - g.x0) + (y - g.y0) * g.width)
+  let get g (x, y) = 
+    g.xs.((x - g.x0) + (y - g.y0) * g.width)
   let set g (x, y) elem = g.xs.((x - g.x0) + (y - g.y0) * g.width) <- elem
 
   let right g (x, y) = ((if x = g.x1 then g.x0 else x + 1), y)
@@ -28,7 +29,7 @@ struct
   let down g (x, y) = (x, if y = g.y1 then g.y0 else y + 1)
     
   let init (lo_x, lo_y) (hi_x, hi_y) (f : coord -> 'a) =
-    let g = { width = hi_x - lo_x; height = hi_y - lo_y;
+    let g = { width = hi_x - lo_x + 1; height = hi_y - lo_y + 1;
               x0 = lo_x; y0 = lo_y; x1 = hi_x; y1 = hi_y;
               xs = Array.make 0 (f (lo_x, lo_y))} in
     g.xs <- Array.init (g.width * g.height) (fun i -> f (coord_of_int g i));

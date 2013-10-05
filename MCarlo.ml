@@ -33,7 +33,8 @@ struct
   let float_mag g coord = float_of_site (G.get g coord)
     
   let init width =
-    {g = G.make (0, 0) (width, width) true; temp = 0.0; 
+    {g = G.init (0, 0) (width - 1, width - 1) (fun _ -> Random.bool ()); 
+     temp = 100.0; 
      energy = -2.0 *. (float (width * width));  
      mag = 1.0 *. (float (width * width))}
 
@@ -47,23 +48,33 @@ struct
     let down_m = int_mag lat.g (G.down lat.g coord) in
     -1.0 *. (float (self_m * (up_m + down_m + left_m + right_m)))
 
+  let rec print_list (print_f : 'a -> unit) (xs : 'a list) : unit = 
+    match xs with
+      [] -> print_newline ()
+    | head :: tail -> 
+      ((print_f head); print_string ", "; print_list print_f tail)
+      
+  let print_coord ((x, y) : G.coord) : unit = Printf.printf "(%d, %d)" x y
+
   let set_rand_mag lat nodes =
     let site_type = Random.bool () in
     let coords = List.map (G.coord_of_int lat.g) nodes in
     List.iter (fun coord -> G.set lat.g coord site_type) coords
 
   let sweep lat =
-    let prob = 1.0 -. exp(-1.0 /. lat.temp) in
+    let prob = 1.0 -. exp(-2.0 /. lat.temp) in
     let edges = generate_edges lat.g in
-    let edges' = List.filter (fun _ -> Random.float 1.0 > prob) edges in
-    let gr = Gr.union (site_count lat) edges' in
+    let edges' = List.filter (fun _ -> Random.float 1.0 < prob) edges in
+    let gr = Gr.union ((site_count lat) - 1) edges' in
     List.iter (set_rand_mag lat) (List.map (Gr.group gr) (Gr.group_ids gr))
 
   let set_temp lat temp = lat.temp <- temp
 
-  let energy lat = lat.energy
+  let energy lat =
+    G.foldi (fun sum coord _ -> sum +. (site_energy lat coord)) 0.0 lat.g
 
-  let magnetization lat = lat.mag
+  let magnetization lat = 
+    G.foldi (fun sum coord _ -> sum +. (float_mag lat.g coord)) 0.0 lat.g
     
   let max_cluster_size lat = 
     let record = Gr.union (site_count lat) (generate_edges lat.g) in
@@ -82,7 +93,7 @@ struct
     (e_hist, m_hist)
       
   let print lat = 
-    G.print lat.g (fun s -> if s then print_string "+" else print_string "-")
+    G.print lat.g (fun s -> if s then print_string "+" else print_string " ")
 end
 
 module MakeMetropolis = functor (Hist : HISTOGRAM) ->
@@ -101,7 +112,7 @@ struct
   let float_mag g coord = float_of_site (G.get g coord)
     
   let init width =
-    {g = G.make (0, 0) (width, width) true; temp = 0.0; 
+    {g = G.make (0, 0) (width - 1, width - 1) true; temp = 0.0; 
      energy = -2.0 *. (float (width * width));  
      mag = 1.0 *. (float (width * width))}
 
@@ -118,11 +129,11 @@ struct
   let update_site lat coord _ =
     let d_e = -2.0 *. (site_energy lat coord) in
     (* TODO: optimize this calculation *)
-    if d_e < 0. || Random.float 1. < exp (d_e /. lat.temp) then begin
+    if d_e < 0. || Random.float 1. < exp (-.d_e /. lat.temp) then (
       G.set lat.g coord (not (G.get lat.g coord));
       lat.energy <- lat.energy +. d_e;
-      lat.mag <- lat.mag -. 2.0 *. (float_mag lat.g coord)
-    end
+      lat.mag <- lat.mag -. 2.0 *. (float_mag lat.g coord);
+    )
 
   let sweep lat = G.iter G.SequentialSweep (update_site lat) lat.g
 
@@ -133,7 +144,7 @@ struct
   let magnetization lat = lat.mag
 
   let max_cluster_size lat = 
-    let record = Gr.union (site_count lat) (generate_edges lat.g) in
+    let record = Gr.union ((site_count lat) - 1) (generate_edges lat.g) in
     Gr.group_size record (Gr.largest_group record)
     
   let create_histograms lat sweeps =
@@ -149,5 +160,5 @@ struct
     (e_hist, m_hist)
 
   let print lat = 
-    G.print lat.g (fun s -> if s then print_string "+" else print_string "-")
+    G.print lat.g (fun s -> if s then print_string "+" else print_string " ")
 end
