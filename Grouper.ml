@@ -22,6 +22,8 @@ struct
       group_id
         
   let union max_node edges =
+    (*print_int max_node;
+    print_newline ();*)
     let g = { ids = Array.init (max_node + 1) (fun x -> x); 
               sizes = Array.make (max_node + 1) 1;
               groups = Array.make (max_node + 1) [];

@@ -1,0 +1,428 @@
+\documentclass[11pt]{article} 
+\usepackage[latin1]{inputenc} 
+\usepackage[T1]{fontenc} 
+\usepackage{textcomp}
+\usepackage{fullpage} 
+\usepackage{url} 
+\usepackage{ocamldoc}
+\begin{document}
+\tableofcontents
+\section{Module {\tt{Signatures}} : A repository for all the signatures used by the bellagio package.}
+\label{module:Signatures}\index{Signatures@\verb`Signatures`}
+
+
+
+
+\ocamldocvspace{0.5cm}
+
+
+
+\begin{ocamldoccode}
+{\tt{module type }}{\tt{GRID}}{\tt{ = }}\end{ocamldoccode}
+\label{moduletype:Signatures.GRID}\index{GRID@\verb`GRID`}
+
+\begin{ocamldocsigend}
+
+
+\label{type:Signatures.GRID.grid}\begin{ocamldoccode}
+type {\textquotesingle}a grid 
+\end{ocamldoccode}
+\index{grid@\verb`grid`}
+\begin{ocamldocdescription}
+The type of a grid containing elements of type {\tt{{\textquotesingle}a}}.
+
+
+\end{ocamldocdescription}
+
+
+\label{type:Signatures.GRID.coord}\begin{ocamldoccode}
+type coord = int * int 
+\end{ocamldoccode}
+\index{coord@\verb`coord`}
+\begin{ocamldocdescription}
+The type of an index into the grid.
+
+
+\end{ocamldocdescription}
+
+
+\label{type:Signatures.GRID.iter-underscoreorder}\begin{ocamldoccode}
+type iter_order =
+  | SequentialSweep
+  | CheckerboardSweep
+  | RandomSweep
+\end{ocamldoccode}
+\index{iter-underscoreorder@\verb`iter_order`}
+\begin{ocamldocdescription}
+The type representing the order in which iteration is done over the 
+      grid.
+
+
+\end{ocamldocdescription}
+
+
+\label{val:Signatures.GRID.int-underscoreof-underscorecoord}\begin{ocamldoccode}
+val int_of_coord : {\textquotesingle}a grid -> coord -> int
+\end{ocamldoccode}
+\index{int-underscoreof-underscorecoord@\verb`int_of_coord`}
+\begin{ocamldocdescription}
+{\tt{int\_of\_coord g (x, y)}} converts a coordinate {\tt{(x, y)}} into a integer 
+      between 0 and {\tt{(Grid.width g) * (Grid.height g) - 1}}, inclusive.
+
+
+\end{ocamldocdescription}
+
+
+\label{val:Signatures.GRID.coord-underscoreof-underscoreint}\begin{ocamldoccode}
+val coord_of_int : {\textquotesingle}a grid -> int -> coord
+\end{ocamldoccode}
+\index{coord-underscoreof-underscoreint@\verb`coord_of_int`}
+\begin{ocamldocdescription}
+{\tt{coord\_of\_int g i}} converts an index between 0 and
+      {\tt{(Grid.width g) * (Grid.height g) - 1}}, inclusive, to a unique coordinate.
+      indexing into {\tt{g}}.
+
+
+\end{ocamldocdescription}
+
+
+\label{val:Signatures.GRID.width}\begin{ocamldoccode}
+val width : {\textquotesingle}a grid -> int
+\end{ocamldoccode}
+\index{width@\verb`width`}
+\begin{ocamldocdescription}
+{\tt{width c}} returns the number of elements in a single row of {\tt{g}}.
+
+
+\end{ocamldocdescription}
+
+
+\label{val:Signatures.GRID.height}\begin{ocamldoccode}
+val height : {\textquotesingle}a grid -> int
+\end{ocamldoccode}
+\index{height@\verb`height`}
+\begin{ocamldocdescription}
+{\tt{height g}} returns the number of elements in a single column of {\tt{g}}.
+
+
+\end{ocamldocdescription}
+
+
+\label{val:Signatures.GRID.get}\begin{ocamldoccode}
+val get : {\textquotesingle}a grid -> coord -> {\textquotesingle}a
+\end{ocamldoccode}
+\index{get@\verb`get`}
+\begin{ocamldocdescription}
+{\tt{get g (x, y)}} returns the element stored at the coordinate {\tt{(x, y)}} in 
+      the grid {\tt{g}}.
+
+
+\end{ocamldocdescription}
+
+
+\label{val:Signatures.GRID.set}\begin{ocamldoccode}
+val set : {\textquotesingle}a grid -> coord -> {\textquotesingle}a -> unit
+\end{ocamldoccode}
+\index{set@\verb`set`}
+\begin{ocamldocdescription}
+{\tt{set g (x, y) elem}} sets the element stored a the coordinate {\tt{(x, y)}} in
+      {\tt{g}} to {\tt{elem}}.
+
+
+\end{ocamldocdescription}
+
+
+\label{val:Signatures.GRID.make}\begin{ocamldoccode}
+val make : coord ->
+  coord -> {\textquotesingle}a -> {\textquotesingle}a grid
+\end{ocamldoccode}
+\index{make@\verb`make`}
+\begin{ocamldocdescription}
+{\tt{make (lo\_x, lo\_y) (hi\_x, hi\_y) elem}} creates a grid width width {\tt{lo\_}}
+
+
+\end{ocamldocdescription}
+
+
+\label{val:Signatures.GRID.init}\begin{ocamldoccode}
+val init : coord ->
+  coord ->
+  (coord -> {\textquotesingle}a) -> {\textquotesingle}a grid
+\end{ocamldoccode}
+\index{init@\verb`init`}
+
+
+\label{val:Signatures.GRID.iter}\begin{ocamldoccode}
+val iter : iter_order ->
+  (coord -> {\textquotesingle}a -> unit) -> {\textquotesingle}a grid -> unit
+\end{ocamldoccode}
+\index{iter@\verb`iter`}
+
+
+\label{val:Signatures.GRID.fold}\begin{ocamldoccode}
+val fold : ({\textquotesingle}a -> {\textquotesingle}b -> {\textquotesingle}a) -> {\textquotesingle}a -> {\textquotesingle}b grid -> {\textquotesingle}a
+\end{ocamldoccode}
+\index{fold@\verb`fold`}
+
+
+\label{val:Signatures.GRID.foldi}\begin{ocamldoccode}
+val foldi : ({\textquotesingle}a -> coord -> {\textquotesingle}b -> {\textquotesingle}a) ->
+  {\textquotesingle}a -> {\textquotesingle}b grid -> {\textquotesingle}a
+\end{ocamldoccode}
+\index{foldi@\verb`foldi`}
+
+
+\label{val:Signatures.GRID.print}\begin{ocamldoccode}
+val print : {\textquotesingle}a grid -> ({\textquotesingle}a -> unit) -> unit
+\end{ocamldoccode}
+\index{print@\verb`print`}
+
+
+\label{val:Signatures.GRID.right}\begin{ocamldoccode}
+val right : {\textquotesingle}a grid -> coord -> coord
+\end{ocamldoccode}
+\index{right@\verb`right`}
+
+
+\label{val:Signatures.GRID.left}\begin{ocamldoccode}
+val left : {\textquotesingle}a grid -> coord -> coord
+\end{ocamldoccode}
+\index{left@\verb`left`}
+
+
+\label{val:Signatures.GRID.up}\begin{ocamldoccode}
+val up : {\textquotesingle}a grid -> coord -> coord
+\end{ocamldoccode}
+\index{up@\verb`up`}
+
+
+\label{val:Signatures.GRID.down}\begin{ocamldoccode}
+val down : {\textquotesingle}a grid -> coord -> coord
+\end{ocamldoccode}
+\index{down@\verb`down`}
+\end{ocamldocsigend}
+
+
+
+
+
+
+\begin{ocamldoccode}
+{\tt{module type }}{\tt{GROUPER}}{\tt{ = }}\end{ocamldoccode}
+\label{moduletype:Signatures.GROUPER}\index{GROUPER@\verb`GROUPER`}
+
+\begin{ocamldocsigend}
+
+
+\label{type:Signatures.GROUPER.group-underscorerecord}\begin{ocamldoccode}
+type group_record 
+\end{ocamldoccode}
+\index{group-underscorerecord@\verb`group_record`}
+
+
+\label{type:Signatures.GROUPER.node}\begin{ocamldoccode}
+type node = int 
+\end{ocamldoccode}
+\index{node@\verb`node`}
+
+
+\label{type:Signatures.GROUPER.edge}\begin{ocamldoccode}
+type edge = node * node 
+\end{ocamldoccode}
+\index{edge@\verb`edge`}
+
+
+\label{type:Signatures.GROUPER.group-underscoreid}\begin{ocamldoccode}
+type group_id = int 
+\end{ocamldoccode}
+\index{group-underscoreid@\verb`group_id`}
+
+
+\label{val:Signatures.GROUPER.union}\begin{ocamldoccode}
+val union : node ->
+  edge list -> group_record
+\end{ocamldoccode}
+\index{union@\verb`union`}
+
+
+\label{val:Signatures.GROUPER.find}\begin{ocamldoccode}
+val find : group_record ->
+  node -> group_id
+\end{ocamldoccode}
+\index{find@\verb`find`}
+
+
+\label{val:Signatures.GROUPER.group-underscoreids}\begin{ocamldoccode}
+val group_ids : group_record -> group_id list
+\end{ocamldoccode}
+\index{group-underscoreids@\verb`group_ids`}
+
+
+\label{val:Signatures.GROUPER.group}\begin{ocamldoccode}
+val group : group_record ->
+  group_id -> node list
+\end{ocamldoccode}
+\index{group@\verb`group`}
+
+
+\label{val:Signatures.GROUPER.group-underscoresize}\begin{ocamldoccode}
+val group_size : group_record -> group_id -> int
+\end{ocamldoccode}
+\index{group-underscoresize@\verb`group_size`}
+
+
+\label{val:Signatures.GROUPER.largest-underscoregroup}\begin{ocamldoccode}
+val largest_group : group_record -> group_id
+\end{ocamldoccode}
+\index{largest-underscoregroup@\verb`largest_group`}
+\end{ocamldocsigend}
+
+
+
+
+
+
+\begin{ocamldoccode}
+{\tt{module type }}{\tt{HISTOGRAM}}{\tt{ = }}\end{ocamldoccode}
+\label{moduletype:Signatures.HISTOGRAM}\index{HISTOGRAM@\verb`HISTOGRAM`}
+
+\begin{ocamldocsigend}
+
+
+\label{type:Signatures.HISTOGRAM.histogram}\begin{ocamldoccode}
+type histogram 
+\end{ocamldoccode}
+\index{histogram@\verb`histogram`}
+
+
+\label{val:Signatures.HISTOGRAM.init}\begin{ocamldoccode}
+val init : float -> float -> int -> histogram
+\end{ocamldoccode}
+\index{init@\verb`init`}
+
+
+\label{val:Signatures.HISTOGRAM.init-underscorebounded}\begin{ocamldoccode}
+val init_bounded : float -> float -> int -> histogram
+\end{ocamldoccode}
+\index{init-underscorebounded@\verb`init_bounded`}
+
+
+\label{val:Signatures.HISTOGRAM.bin-underscorevalue}\begin{ocamldoccode}
+val bin_value : histogram -> int -> float
+\end{ocamldoccode}
+\index{bin-underscorevalue@\verb`bin_value`}
+
+
+\label{val:Signatures.HISTOGRAM.bin-underscoreindex}\begin{ocamldoccode}
+val bin_index : histogram -> float -> int
+\end{ocamldoccode}
+\index{bin-underscoreindex@\verb`bin_index`}
+
+
+\label{val:Signatures.HISTOGRAM.add}\begin{ocamldoccode}
+val add : histogram -> float -> unit
+\end{ocamldoccode}
+\index{add@\verb`add`}
+
+
+\label{val:Signatures.HISTOGRAM.bins}\begin{ocamldoccode}
+val bins : histogram -> int list
+\end{ocamldoccode}
+\index{bins@\verb`bins`}
+\end{ocamldocsigend}
+
+
+
+
+
+
+\begin{ocamldoccode}
+{\tt{module type }}{\tt{MCARLO}}{\tt{ = }}\end{ocamldoccode}
+\label{moduletype:Signatures.MCARLO}\index{MCARLO@\verb`MCARLO`}
+
+\begin{ocamldocsigend}
+
+
+\label{type:Signatures.MCARLO.lattice}\begin{ocamldoccode}
+type lattice 
+\end{ocamldoccode}
+\index{lattice@\verb`lattice`}
+
+
+\label{type:Signatures.MCARLO.histogram}\begin{ocamldoccode}
+type histogram 
+\end{ocamldoccode}
+\index{histogram@\verb`histogram`}
+
+
+\label{val:Signatures.MCARLO.init}\begin{ocamldoccode}
+val init : int -> lattice
+\end{ocamldoccode}
+\index{init@\verb`init`}
+
+
+\label{val:Signatures.MCARLO.site-underscorecount}\begin{ocamldoccode}
+val site_count : lattice -> int
+\end{ocamldoccode}
+\index{site-underscorecount@\verb`site_count`}
+
+
+\label{val:Signatures.MCARLO.sweep}\begin{ocamldoccode}
+val sweep : lattice -> unit
+\end{ocamldoccode}
+\index{sweep@\verb`sweep`}
+
+
+\label{val:Signatures.MCARLO.set-underscoretemp}\begin{ocamldoccode}
+val set_temp : lattice -> float -> unit
+\end{ocamldoccode}
+\index{set-underscoretemp@\verb`set_temp`}
+
+
+\label{val:Signatures.MCARLO.energy}\begin{ocamldoccode}
+val energy : lattice -> float
+\end{ocamldoccode}
+\index{energy@\verb`energy`}
+
+
+\label{val:Signatures.MCARLO.magnetization}\begin{ocamldoccode}
+val magnetization : lattice -> float
+\end{ocamldoccode}
+\index{magnetization@\verb`magnetization`}
+
+
+\label{val:Signatures.MCARLO.max-underscorecluster-underscoresize}\begin{ocamldoccode}
+val max_cluster_size : lattice -> int
+\end{ocamldoccode}
+\index{max-underscorecluster-underscoresize@\verb`max_cluster_size`}
+
+
+\label{val:Signatures.MCARLO.create-underscorehistograms}\begin{ocamldoccode}
+val create_histograms : lattice ->
+  int -> histogram * histogram
+\end{ocamldoccode}
+\index{create-underscorehistograms@\verb`create_histograms`}
+
+
+\label{val:Signatures.MCARLO.print}\begin{ocamldoccode}
+val print : lattice -> unit
+\end{ocamldoccode}
+\index{print@\verb`print`}
+\end{ocamldocsigend}
+
+
+
+
+
+
+\begin{ocamldoccode}
+{\tt{module type }}{\tt{MCARLO\_FUNCTOR}}{\tt{ = }}\end{ocamldoccode}
+\label{moduletype:Signatures.MCARLO-underscoreFUNCTOR}\index{MCARLO-underscoreFUNCTOR@\verb`MCARLO_FUNCTOR`}
+
+{\tt{functor (}}{\tt{Hist}}{\tt{ : }}{\tt{HISTOGRAM}}{\tt{) -> }}{\tt{MCARLO}}{\tt{ }}{\tt{ with type histogram = Hist.histogram}}
+
+
+
+
+
+\end{document}
