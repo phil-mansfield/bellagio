@@ -1,67 +1,55 @@
-all: bytecode-tests native-code-tests
+OCAMLC := ocamlc.opt
+OCAMLOPT := ocamlopt.opt
+
+DB_FLAGS := -g
+OPT_FLAGS := -unsafe
+
+MLGSLDIR := ../libs/gsl/ocamlgsl-0.6.0/
+
+ML_FILES := Utils.ml AsciiTable.ml Grouper.ml Grid.ml Histogram.ml MCarlo.ml
+MLI_FILES := $(patsubst %.ml,%.mli,$(ML_FILES))
+CMO_FILES := $(patsubst %.ml,%.cmo,$(ML_FILES))
+CMI_FILES := $(patsubst %.ml,%.cmi,$(ML_FILES))
+CMX_FILES := $(patsubst %.ml,%.cmx,$(ML_FILES))
+O_FILES := $(patsubst %.ml,%.o,$(ML_FILES))
+
+LIBS := str.cma
+LIBS_OPT := str.cmxa
+
+GSL_LIBS := bigarray.cma gsl.cma
+GSL_LIBS_OPT := bigarray.cmxa gsl.cmxa
+
+all: renormalize.byte renormalize.native
 
 Signatures.cmo: Signatures.ml
-	ocamlc.opt -g -c Signatures.ml
+	$(OCAMLC) $(DB_FLAGS) -c Signatures.ml
 
-Signatures.o: Signatures.ml
-	ocamlopt -c -c Signatures.ml
+Signatures.cmx: Signatures.ml
+	$(OCAMLOPT) $(OPT_FLAGS) -c Signatures.ml
 
-Utils.cmi: Signatures.ml Utils.mli
-	ocamlc.opt -g -c Utils.mli
+%.cmi: %.mli Signatures.ml
+	$(OCAMLC) $(DB_FLAGS) -c $<
 
-Grouper.cmi: Signatures.ml Grouper.mli
-	ocamlc.opt -g -c Grouper.mli
+%.cmo: %.ml %.mli Signatures.ml Utils.mli
+	$(OCAMLC) $(DB_FLAGS) -c $<
 
-Grid.cmi: Signatures.ml Grid.mli
-	ocamlc.opt -g -c Grid.mli
+%.o: %.mli Signatures.ml
+	$(OCAMLOPT) $(OPT_FLAGS) -c $<
 
-Histogram.cmi: Signatures.ml Histogram.mli
-	ocamlc.opt -g -c Histogram.mli
+%.cmx: %.ml %.mli Signatures.ml Utils.mli
+	$(OCAMLOPT) $(OPT_FLAGS) -c $<
 
-MCarlo.cmi: Signatures.ml MCarlo.mli
-	ocamlc.opt -g -c MCarlo.mli
+Renormalize.cmo: Renormalize.ml $(MLI_FILES) Signatures.ml
+	$(OCAMLC) $(DB_FLAGS) -c -I $(MLGSLDIR) $<
 
-Utils.cmo: Utils.cmi Utils.ml
-	ocamlc.opt -g -c Utils.ml
+Renormalize.cmx: Renormalize.ml $(MLI_FILES) Signatures.ml
+	$(OCAMLOPT) $(DB_FLAGS) -c -I $(MLGSLDIR) $<
 
-Grouper.cmo: Utils.cmi Grouper.cmi Grouper.ml
-	ocamlc.opt -g -c Grouper.ml
+renormalize.byte: Signatures.cmo $(CMI_FILES) $(CMO_FILES) Renormalize.cmo $(MLGSLDIR)/gsl.cma $(MLGSLDIR)/libmlgsl.a
+	$(OCAMLC) $(DB_FLAGS) -o $@ Signatures.cmo -I $(MLGSLDIR) -dllpath $(MLGSLDIR) $(LIBS) $(GSL_LIBS) $(CMO_FILES) Renormalize.cmo	
 
-Grid.cmo: Grid.cmi Grid.ml
-	ocamlc.opt -g -c Grid.ml
+renormalize.native: Signatures.cmx $(O_FILES) $(CMX_FILES) Renormalize.cmx $(MLGSLDIR)/gsl.cmxa $(MLGSLDIR)/libmlgsl.a
+	$(OCAMLOPT) $(DB_FLAGS) -o $@ Signatures.cmx -I $(MLGSLDIR) $(LIBS_OPT) $(GSL_LIBS_OPT) $(CMX_FILES) Renormalize.cmx	
 
-Histogram.cmo: Histogram.cmi Histogram.ml
-	ocamlc.opt -g -c Histogram.ml
-
-MCarlo.cmo: MCarlo.cmi MCarlo.ml
-	ocamlc.opt -g -c MCarlo.ml
-
-Test.cmo: Test.ml Grouper.cmi
-	ocamlc.opt -g -c Test.ml
-
-Utils.o: Utils.cmi Utils.ml
-	ocamlopt -g -c Utils.ml
-
-Grouper.o: Utils.cmi Grouper.cmi Grouper.ml
-	ocamlopt -g -c Grouper.ml
-
-Grid.o: Grid.cmi Grid.ml
-	ocamlopt -g -c Grid.ml
-
-Histogram.o: Histogram.cmi Histogram.ml
-	ocamlopt -g -c Histogram.ml
-
-MCarlo.o: MCarlo.cmi MCarlo.ml
-	ocamlopt -g -c MCarlo.ml
-
-Test.o: Test.ml Grouper.cmi
-	ocamlopt -g -c Test.ml
-
-bytecode-tests: Makefile Signatures.cmo Utils.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Test.cmo
-	ocamlc.opt -g -o bytecode-tests Signatures.cmo Utils.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Test.cmo
-
-native-code-tests: Makefile Signatures.o Utils.o Grouper.o Grid.o Histogram.o MCarlo.o Test.o
-	ocamlopt -g -o native-code-tests Signatures.o Utils.o Grouper.o Grid.o Histogram.o MCarlo.o Test.o
-
-clean:
-	rm run-tests *.cmo *.cmi *.o *.cmx
+clean: 
+	rm *.byte *.native *.cm* *.o

@@ -1,4 +1,5 @@
 (** A repository for all the signatures used by the bellagio package. *)
+open Array
 
 module type GRID = 
 sig
@@ -64,7 +65,7 @@ sig
       seperates rows by newlines. *)
   val print : 'a grid -> ('a -> unit) -> unit
 
-    (** [right g (x, y)]*)
+  (** [right g (x, y)]*)
   val right : 'a grid -> coord -> coord
   val left : 'a grid -> coord -> coord
   val up : 'a grid -> coord -> coord
@@ -107,7 +108,7 @@ module type MCARLO =
 sig
   type lattice
   type histogram
-  type bond_type = NearestNeighbors | NextNearestNeighbors
+  type bond_type = NN1 | NN2 | NN3 | DMD | SQR
   type normalize_type = Random2By2 | InPlace2By2 | InPlace3By3
 
   val init : int -> lattice
@@ -116,10 +117,11 @@ sig
   val reset : lattice -> unit
   val sweep : lattice -> unit
   val set_temp : lattice -> float -> unit
+  val set_bond_types : lattice -> (bond_type * float) array -> unit
 
   val renormalize : lattice -> normalize_type -> float option -> lattice
 
-  val correlation : bond_type -> float
+  val correlation : lattice -> bond_type -> float
 
   val energy : lattice -> float
   val magnetization : lattice -> float

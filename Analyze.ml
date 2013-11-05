@@ -1,6 +1,6 @@
 module OutTable = AsciiTable.OutTable
 module Hist = Histogram.ArrayHistogram
-module MC = MCarlo.MakeMetropolis(Hist)
+module MC = MCarlo.MakeSwendsenWang(Hist)
 
 let equalize_time = 100
 

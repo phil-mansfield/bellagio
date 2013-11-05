@@ -27,7 +27,7 @@ struct
   let left g (x, y) = ((if x = g.x0 then g.x1 else x - 1), y)
   let up g (x, y) = (x, if y = g.y0 then g.y1 else y - 1)
   let down g (x, y) = (x, if y = g.y1 then g.y0 else y + 1)
-    
+
   let init (lo_x, lo_y) (hi_x, hi_y) (f : coord -> 'a) =
     let g = { width = hi_x - lo_x + 1; height = hi_y - lo_y + 1;
               x0 = lo_x; y0 = lo_y; x1 = hi_x; y1 = hi_y;
