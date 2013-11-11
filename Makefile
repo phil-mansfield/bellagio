@@ -19,7 +19,7 @@ LIBS_OPT := str.cmxa
 GSL_LIBS := bigarray.cma gsl.cma
 GSL_LIBS_OPT := bigarray.cmxa gsl.cmxa
 
-all: renormalize.byte renormalize.native
+all: renormalize.byte renormalize.native find_critical.byte find_critical.native
 
 Signatures.cmo: Signatures.ml
 	$(OCAMLC) $(DB_FLAGS) -c Signatures.ml
@@ -50,6 +50,19 @@ renormalize.byte: Signatures.cmo $(CMI_FILES) $(CMO_FILES) Renormalize.cmo $(MLG
 
 renormalize.native: Signatures.cmx $(O_FILES) $(CMX_FILES) Renormalize.cmx $(MLGSLDIR)/gsl.cmxa $(MLGSLDIR)/libmlgsl.a
 	$(OCAMLOPT) $(DB_FLAGS) -o $@ Signatures.cmx -I $(MLGSLDIR) $(LIBS_OPT) $(GSL_LIBS_OPT) $(CMX_FILES) Renormalize.cmx	
+
+Find_Critical.cmo: Find_Critical.ml $(MLI_FILES) Signatures.ml
+	$(OCAMLC) $(DB_FLAGS) -c -I $(MLGSLDIR) $<
+
+Find_Critical.cmx: Find_Critical.ml $(MLI_FILES) Signatures.ml
+	$(OCAMLOPT) $(DB_FLAGS) -c -I $(MLGSLDIR) $<
+
+find_critical.byte: Signatures.cmo $(CMI_FILES) $(CMO_FILES) Find_Critical.cmo $(MLGSLDIR)/gsl.cma $(MLGSLDIR)/libmlgsl.a
+	$(OCAMLC) $(DB_FLAGS) -o $@ Signatures.cmo -I $(MLGSLDIR) -dllpath $(MLGSLDIR) $(LIBS) $(GSL_LIBS) $(CMO_FILES) Find_Critical.cmo	
+
+find_critical.native: Signatures.cmx $(O_FILES) $(CMX_FILES) Find_Critical.cmx $(MLGSLDIR)/gsl.cmxa $(MLGSLDIR)/libmlgsl.a
+	$(OCAMLOPT) $(DB_FLAGS) -o $@ Signatures.cmx -I $(MLGSLDIR) $(LIBS_OPT) $(GSL_LIBS_OPT) $(CMX_FILES) Find_Critical.cmx	
+
 
 clean: 
 	rm *.byte *.native *.cm* *.o

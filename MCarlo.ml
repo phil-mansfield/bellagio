@@ -112,7 +112,7 @@ struct
     for bond_set_i=0 to Array.length bond_sets - 1 do
       (* Think hard about union-find to figure out whether or not this
          appoach gives optimal branching: *)
-      if locks.(bond_set_i) <> 0 && Random.float 1.0 < prob then
+      if locks.(bond_set_i) <> 0 &&  Random.float 1.0 < prob then
         let bond_set = bond_sets.(bond_set_i) in
         for i=1 to Array.length bond_set - 1 do
           let edge = (G.int_of_coord g bond_set.(i-1), 
@@ -146,7 +146,7 @@ struct
     let global_edges : (int * int) list list ref = ref [] in
     for i=0 to Array.length lat.bonds - 1 do
       let (bt, k) = lat.bonds.(i) in
-      let prob = 1.0 -. exp(-2.0 *. k /. lat.temp) in
+      let prob = 1.0 -. exp(-1.0 *. k /. lat.temp) in
       let edges = List.flatten 
         (G.foldi (fun xs c _ -> bond_edges bt prob lat.g c :: xs) [] lat.g) in
       global_edges := edges :: !global_edges;
@@ -188,7 +188,7 @@ struct
       let (bt, k) = lat.bonds.(i) in
       energy := !energy +. k *. (correlation lat bt);
     done;
-    !energy
+    -1. *. !energy
 
   let magnetization lat = 
     G.foldi (fun sum coord _ -> sum +. (float_mag lat.g coord)) 0.0 lat.g

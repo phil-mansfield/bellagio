@@ -1,0 +1,849 @@
+bash-3.2$ make
+ocamlc.opt -g -c Signatures.ml
+ocamlc.opt -g -c Utils.mli
+ocamlc.opt -g -c AsciiTable.mli
+ocamlc.opt -g -c Grouper.mli
+ocamlc.opt -g -c Grid.mli
+ocamlc.opt -g -c Histogram.mli
+ocamlc.opt -g -c MCarlo.mli
+ocamlc.opt -g -c Utils.ml
+ocamlc.opt -g -c AsciiTable.ml
+ocamlc.opt -g -c Grouper.ml
+ocamlc.opt -g -c Grid.ml
+ocamlc.opt -g -c Histogram.ml
+ocamlc.opt -g -c MCarlo.ml
+File "MCarlo.ml", line 120, characters 18-19:
+Warning 26: unused variable v.
+File "MCarlo.ml", line 120, characters 15-16:
+Warning 26: unused variable u.
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 16, characters 27-39:
+Error: This expression has type (MC.bond_type * float) array
+       but an expression was expected of type 'a list
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 16, characters 27-39:
+Error: This expression has type (MC.bond_type * float) array
+       but an expression was expected of type 'a list
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 47, characters 16-23:
+Error: Bad conversion %:, at char number 0 in format string ``%16: ''
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 47, characters 16-24:
+Error: This expression has type
+         (string -> 'a -> 'b -> 'c -> 'd, out_channel, unit, unit, unit,
+          'a -> 'b -> 'c -> 'd)
+         format6
+       but an expression was expected of type
+         (string -> 'a -> 'b -> 'c -> 'd, out_channel, unit) format =
+           (string -> 'a -> 'b -> 'c -> 'd, out_channel, unit, unit, 
+            unit, unit)
+           format6
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 51, characters 37-65:
+Error: This expression has type (MC.bond_type * float) list
+       but an expression was expected of type (string * float) list
+       Type MC.bond_type = MCarlo.MakeSwendsenWang(Hist).bond_type
+       is not compatible with type string 
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -unsafe -c Signatures.ml
+ocamlopt.opt -unsafe -c Utils.mli
+ocamlopt.opt -unsafe -c AsciiTable.mli
+ocamlopt.opt -unsafe -c Grouper.mli
+ocamlopt.opt -unsafe -c Grid.mli
+ocamlopt.opt -unsafe -c Histogram.mli
+ocamlopt.opt -unsafe -c MCarlo.mli
+ocamlopt.opt -unsafe -c Utils.ml
+ocamlopt.opt -unsafe -c AsciiTable.ml
+ocamlopt.opt -unsafe -c Grouper.ml
+ocamlopt.opt -unsafe -c Grid.ml
+ocamlopt.opt -unsafe -c Histogram.ml
+ocamlopt.opt -unsafe -c MCarlo.ml
+File "MCarlo.ml", line 120, characters 18-19:
+Warning 26: unused variable v.
+File "MCarlo.ml", line 120, characters 15-16:
+Warning 26: unused variable u.
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Find_Critical.ml
+ocamlc.opt -g -o find_critical.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Find_Critical.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Find_Critical.ml
+ocamlopt.opt -g -o find_critical.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Find_Critical.cmx	
+bash-3.2$ ls
+Analyze.ml		Grouper.ml		Renormalize.o
+AsciiTable.cmi		Grouper.mli		Signatures.cmi
+AsciiTable.cmo		Grouper.o		Signatures.cmo
+AsciiTable.cmx		Histogram.cmi		Signatures.cmx
+AsciiTable.ml		Histogram.cmo		Signatures.ml
+AsciiTable.mli		Histogram.cmx		Signatures.o
+AsciiTable.o		Histogram.ml		Test.ml
+Find_Critical.cmi	Histogram.mli		Utils.cmi
+Find_Critical.cmo	Histogram.o		Utils.cmo
+Find_Critical.cmx	MCarlo.cmi		Utils.cmx
+Find_Critical.ml	MCarlo.cmo		Utils.ml
+Find_Critical.o		MCarlo.cmx		Utils.mli
+Grid.cmi		MCarlo.ml		Utils.o
+Grid.cmo		MCarlo.mli		_build
+Grid.cmx		MCarlo.o		documentation
+Grid.ml			Makefile		find_critical.byte
+Grid.mli		README.md		find_critical.native
+Grid.o			Renormalize.cmi		out.table
+Grouper.cmi		Renormalize.cmo		renormalize.byte
+Grouper.cmo		Renormalize.cmx		renormalize.native
+Grouper.cmx		Renormalize.ml
+bash-3.2$ 
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 21, characters 0-2:
+Error: Syntax error
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 22, characters 4-12:
+Error: Syntax error
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 24, characters 63-75:
+Error: This expression has type string but an expression was expected of type
+         float
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 
+Fatal error: exception Assert_failure("Renormalize.ml", 21, 8)
+bash-3.2$ ./renormalize.byte 16 1_000
+Fatal error: exception Invalid_argument("index out of bounds")
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.859985
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.894314
+               2         0.896827
+bash-3.2$ ./renormalize.byte 16 10_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:            10000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.899475
+               2         0.933953
+bash-3.2$ ./renormalize.byte 64 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               64
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.929173
+               2         0.934399
+               3         0.973938
+               4          0.91498
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 189, characters 53-54:
+Error: Syntax error
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 189, characters 53-54:
+Error: Syntax error
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 32 10_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:            10000
+   Initial Width:               32
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.930576
+               2         0.957735
+               3         0.926181
+               4         0.912249
+Rough execution estimate: 443.33 seconds :(
+bash-3.2$ ./renormalize.byte 64 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               64
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1          0.94235
+               2         0.967712
+               3         0.978894
+               4         0.914098
+               5         0.942548
+Rough execution estimate: 187.973 seconds :(
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 69, characters 2-5:
+Error: Syntax error
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 59, characters 23-26:
+Error: Unbound value lat
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 68, characters 25-63:
+Error: This expression should not be a function, the expected type is
+int
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 119, characters 37-44:
+Error: This expression has type int but an expression was expected of type
+         'a ref
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 150, characters 14-21:
+Error: This expression has type int but an expression was expected of type
+         'a ref
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 100
+gsl: lu.c:262: ERROR: matrix is singular
+Default GSL error handler invoked.
+Abort trap: 6
+bash-3.2$ ./renormalize.byte 16 1_000
+gsl: lu.c:262: ERROR: matrix is singular
+Default GSL error handler invoked.
+Abort trap: 6
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.965228
+               2         0.968666
+               3          1.02985
+Rough execution estimate: 11.2443 seconds :(
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1          0.87602
+               2          0.95587
+               3         0.957666
+Rough execution estimate: 11.3176 seconds :(
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.970221
+               2          0.93902
+               3         0.643492
+Rough execution estimate: 12.0908 seconds :(
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.904966
+               2         0.920158
+               3          1.06427
+Rough execution estimate: 11.1932 seconds :(
+bash-3.2$ ./renormalize.byte 32 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               32
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.903052
+               2         0.971056
+               3         0.932222
+               4         0.783798
+Rough execution estimate: 46.3799 seconds :(
+bash-3.2$ ./renormalize.byte 16 4_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             4000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.885569
+               2         0.947124
+               3         0.976364
+Rough execution estimate: 43.8039 seconds :(
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.918661
+               2         0.942537
+               3          0.99417
+Rough execution estimate: 11.6158 seconds :(
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.993253
+               2         0.982456
+               3         0.997976
+Rough execution estimate: 10.0604 seconds :(
+bash-3.2$ dirs
+~/code/ocaml/bellagio
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.969523
+               2         0.979057
+               3         0.966475
+Rough execution estimate: 10.0498 seconds :(
+bash-3.2$ ./renormalize.byte 16 1_000
+  C-c C-c
+bash-3.2$
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(SQR, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1          1.02389
+               2         0.915324
+               3         0.711661
+Rough execution estimate: 9.75269 seconds :(
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(SQR, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.888915
+               2         0.852451
+               3         0.650552
+Rough execution estimate: 9.68262 seconds :(
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(DMD, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1          2.49637
+               2          1.38881
+               3         0.910472
+Rough execution estimate: 9.92761 seconds :(
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+gsl: lu.c:262: ERROR: matrix is singular
+Default GSL error handler invoked.
+Abort trap: 6
+bash-3.2$ ./renormalize.byte 16 1_000
+  C-c C-c
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 0.25); (NN2, 0.25)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.119438
+               2        -0.317404
+               3         -1.81085
+Rough execution estimate: 15.6004 seconds :(
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 0.25)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         -1.24172
+               2         -1.36382
+               3         -2.04603
+Rough execution estimate: 9.00853 seconds :(
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 0.1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1        -0.961641
+               2         -1.47569
+               3         -1.83602
+Rough execution estimate: 8.83804 seconds :(
+bash-3.2$ make
+make: Nothing to be done for `all'.
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.867709
+               2         0.929959
+               3         0.946844
+Rough execution estimate: 10.4984 seconds :(
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+File "Renormalize.ml", line 99, characters 0-3:
+Error: Syntax error
+make: *** [Renormalize.cmo] Error 2
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.919682
+               2         0.852385
+               3           1.0116
+Rough execution estimate: 11.1374 seconds :(
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.934646
+               2         0.942778
+               3          1.16969
+Rough execution estimate: 10.1177 seconds :(
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.871516
+               2         0.855069
+               3         0.746096
+Rough execution estimate: 9.90213 seconds :(
+bash-3.2$ ./renormalize.byte 16 10_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:            10000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1          0.93193
+               2         0.917127
+               3         0.868242
+Rough execution estimate: 94.9704 seconds :(
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 10_000
+  C-c C-c
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.848289
+               2          1.00457
+               3         0.862689
+Rough execution estimate: 9.92717 seconds :(
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+gsl: lu.c:262: ERROR: matrix is singular
+Default GSL error handler invoked.
+Abort trap: 6
+bash-3.2$ make
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 0)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         -2.26566
+               2         -2.48686
+               3         -2.25725
+Rough execution estimate: 8.77461 seconds :(
+bash-3.2$ make
+ocamlc.opt -g -c MCarlo.ml
+File "MCarlo.ml", line 120, characters 18-19:
+Warning 26: unused variable v.
+File "MCarlo.ml", line 120, characters 15-16:
+Warning 26: unused variable u.
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -unsafe -c MCarlo.ml
+File "MCarlo.ml", line 120, characters 18-19:
+Warning 26: unused variable v.
+File "MCarlo.ml", line 120, characters 15-16:
+Warning 26: unused variable u.
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+File "_none_", line 1:
+Error: Files Renormalize.cmx and MCarlo.cmx
+       make inconsistent assumptions over implementation MCarlo
+make: *** [renormalize.native] Error 2
+bash-3.2$ make clean
+rm *.byte *.native *.cm* *.o
+bash-3.2$ make
+ocamlc.opt -g -c Signatures.ml
+ocamlc.opt -g -c Utils.mli
+ocamlc.opt -g -c AsciiTable.mli
+ocamlc.opt -g -c Grouper.mli
+ocamlc.opt -g -c Grid.mli
+ocamlc.opt -g -c Histogram.mli
+ocamlc.opt -g -c MCarlo.mli
+ocamlc.opt -g -c Utils.ml
+ocamlc.opt -g -c AsciiTable.ml
+ocamlc.opt -g -c Grouper.ml
+ocamlc.opt -g -c Grid.ml
+ocamlc.opt -g -c Histogram.ml
+ocamlc.opt -g -c MCarlo.ml
+File "MCarlo.ml", line 120, characters 18-19:
+Warning 26: unused variable v.
+File "MCarlo.ml", line 120, characters 15-16:
+Warning 26: unused variable u.
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -unsafe -c Signatures.ml
+ocamlopt.opt -unsafe -c Utils.mli
+ocamlopt.opt -unsafe -c AsciiTable.mli
+ocamlopt.opt -unsafe -c Grouper.mli
+ocamlopt.opt -unsafe -c Grid.mli
+ocamlopt.opt -unsafe -c Histogram.mli
+ocamlopt.opt -unsafe -c MCarlo.mli
+ocamlopt.opt -unsafe -c Utils.ml
+ocamlopt.opt -unsafe -c AsciiTable.ml
+ocamlopt.opt -unsafe -c Grouper.ml
+ocamlopt.opt -unsafe -c Grid.ml
+ocamlopt.opt -unsafe -c Histogram.ml
+ocamlopt.opt -unsafe -c MCarlo.ml
+File "MCarlo.ml", line 120, characters 18-19:
+Warning 26: unused variable v.
+File "MCarlo.ml", line 120, characters 15-16:
+Warning 26: unused variable u.
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Find_Critical.ml
+ocamlc.opt -g -o find_critical.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Find_Critical.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Find_Critical.ml
+ocamlopt.opt -g -o find_critical.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Find_Critical.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+gsl: lu.c:262: ERROR: matrix is singular
+Default GSL error handler invoked.
+Abort trap: 6
+bash-3.2$ make
+ocamlc.opt -g -c MCarlo.ml
+File "MCarlo.ml", line 120, characters 18-19:
+Warning 26: unused variable v.
+File "MCarlo.ml", line 120, characters 15-16:
+Warning 26: unused variable u.
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -unsafe -c MCarlo.ml
+File "MCarlo.ml", line 120, characters 18-19:
+Warning 26: unused variable v.
+File "MCarlo.ml", line 120, characters 15-16:
+Warning 26: unused variable u.
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+ocamlc.opt -g -o find_critical.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Find_Critical.cmo	
+ocamlopt.opt -g -o find_critical.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Find_Critical.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 0)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1          -2.2316
+               2         -2.11603
+               3         -1.95984
+Rough execution estimate: 8.19468 seconds :(
+bash-3.2$ make
+ocamlc.opt -g -c MCarlo.ml
+File "MCarlo.ml", line 120, characters 18-19:
+Warning 26: unused variable v.
+File "MCarlo.ml", line 120, characters 15-16:
+Warning 26: unused variable u.
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -unsafe -c MCarlo.ml
+File "MCarlo.ml", line 120, characters 18-19:
+Warning 26: unused variable v.
+File "MCarlo.ml", line 120, characters 15-16:
+Warning 26: unused variable u.
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+ocamlc.opt -g -o find_critical.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Find_Critical.cmo	
+ocamlopt.opt -g -o find_critical.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Find_Critical.cmx	
+File "_none_", line 1:
+Error: Files Find_Critical.cmx and MCarlo.cmx
+       make inconsistent assumptions over implementation MCarlo
+make: *** [find_critical.native] Error 2
+bash-3.2$ make clean
+rm *.byte *.native *.cm* *.o
+bash-3.2$ make
+ocamlc.opt -g -c Signatures.ml
+ocamlc.opt -g -c Utils.mli
+ocamlc.opt -g -c AsciiTable.mli
+ocamlc.opt -g -c Grouper.mli
+ocamlc.opt -g -c Grid.mli
+ocamlc.opt -g -c Histogram.mli
+ocamlc.opt -g -c MCarlo.mli
+ocamlc.opt -g -c Utils.ml
+ocamlc.opt -g -c AsciiTable.ml
+ocamlc.opt -g -c Grouper.ml
+ocamlc.opt -g -c Grid.ml
+ocamlc.opt -g -c Histogram.ml
+ocamlc.opt -g -c MCarlo.ml
+File "MCarlo.ml", line 120, characters 18-19:
+Warning 26: unused variable v.
+File "MCarlo.ml", line 120, characters 15-16:
+Warning 26: unused variable u.
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlc.opt -g -o renormalize.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Renormalize.cmo	
+ocamlopt.opt -unsafe -c Signatures.ml
+ocamlopt.opt -unsafe -c Utils.mli
+ocamlopt.opt -unsafe -c AsciiTable.mli
+ocamlopt.opt -unsafe -c Grouper.mli
+ocamlopt.opt -unsafe -c Grid.mli
+ocamlopt.opt -unsafe -c Histogram.mli
+ocamlopt.opt -unsafe -c MCarlo.mli
+ocamlopt.opt -unsafe -c Utils.ml
+ocamlopt.opt -unsafe -c AsciiTable.ml
+ocamlopt.opt -unsafe -c Grouper.ml
+ocamlopt.opt -unsafe -c Grid.ml
+ocamlopt.opt -unsafe -c Histogram.ml
+ocamlopt.opt -unsafe -c MCarlo.ml
+File "MCarlo.ml", line 120, characters 18-19:
+Warning 26: unused variable v.
+File "MCarlo.ml", line 120, characters 15-16:
+Warning 26: unused variable u.
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Renormalize.ml
+ocamlopt.opt -g -o renormalize.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Renormalize.cmx	
+ocamlc.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Find_Critical.ml
+ocamlc.opt -g -o find_critical.byte Signatures.cmo -I ../libs/gsl/ocamlgsl-0.6.0/ -dllpath ../libs/gsl/ocamlgsl-0.6.0/ str.cma bigarray.cma gsl.cma Utils.cmo AsciiTable.cmo Grouper.cmo Grid.cmo Histogram.cmo MCarlo.cmo Find_Critical.cmo	
+ocamlopt.opt -g -c -I ../libs/gsl/ocamlgsl-0.6.0/ Find_Critical.ml
+ocamlopt.opt -g -o find_critical.native Signatures.cmx -I ../libs/gsl/ocamlgsl-0.6.0/ str.cmxa bigarray.cmxa gsl.cmxa Utils.cmx AsciiTable.cmx Grouper.cmx Grid.cmx Histogram.cmx MCarlo.cmx Find_Critical.cmx	
+bash-3.2$ ./renormalize.byte 16 1_000
+Simulation parameters:
+     Temperature:          1.13459
+          Trials:             1000
+   Initial Width:               16
+      Bond Types: [NN1; NN2; NN3; SQR; DMD]
+    Interactions: [(NN1, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+               1         0.977676
+               2          1.05213
+               3          1.08676
+Rough execution estimate: 9.92031 seconds :(
+bash-3.2$ 
