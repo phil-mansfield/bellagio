@@ -59,8 +59,7 @@ let float_of_site site =
 module MakeSwendsenWang = functor (Hist : HISTOGRAM) ->
 struct
   type site = bool
-
-  type bond_type = NN1 | NN2 | NN3 | DMD | SQR
+  type bond_type = NN1 | NN2 | NN3 | DMD | SQR | MAG
   type normalize_type = Random2By2 | InPlace2By2 | InPlace3By3
 
   type lattice = { g : site G.grid;
@@ -71,7 +70,7 @@ struct
   
   let bond_relation bond g coord = 
     match bond with
-      NN1 -> 
+    | NN1 -> 
         [|[|G.left g coord; coord|]; 
           [|G.down g coord; coord|]|]
     | NN2 -> 
@@ -86,6 +85,7 @@ struct
     | SQR -> 
       let l =  G.left g coord in 
       [|[|coord; l; G.down g coord; G.down g l|]|]
+    | _ -> failwith "Cannot call bond_relation on this bond type."
 
   let bond_locks bt g coord = 
     let bond_sets = bond_relation bt g coord in
@@ -139,8 +139,8 @@ struct
     List.iter (fun coord -> G.set lat.g coord site_type) coords
 
   let reset lat =
-    G.iter G.SequentialSweep (fun coord _ -> G.set lat.g coord true) lat.g;
-    lat.temp <- 0.0
+    G.iter G.SequentialSweep
+      (fun coord _ -> G.set lat.g coord (Random.bool ())) lat.g
 
   let sweep lat =
     let global_edges : (int * int) list list ref = ref [] in
@@ -160,18 +160,18 @@ struct
 
   let renormalize lat nt param =
     let width = match nt with
-        Random2By2 -> (G.width lat.g) / 2
+      | Random2By2 -> (G.width lat.g) / 2
       | InPlace2By2 -> G.width lat.g 
       | InPlace3By3 -> G.width lat.g in
     let setter = match nt with
-        Random2By2 -> random2By2_setter
+      | Random2By2 -> random2By2_setter
       | InPlace2By2 -> 
         (match param with 
-          Some gamma -> inPlace2By2_setter gamma
+        | Some gamma -> inPlace2By2_setter gamma
         | None -> failwith "InPlace2By2 needs a parameter")
       | InPlace3By3 -> 
         (match param with 
-          Some gamma -> inPlace3By3_setter gamma
+        | Some gamma -> inPlace3By3_setter gamma
         | None -> failwith "InPlace3By3 needs a parameter") in
     { g = set_new_grid lat.g width setter;
       temp = lat.temp;
@@ -179,8 +179,12 @@ struct
 
   (* TODO: Figure out if you need to divide by n. *)
   let correlation lat bt =
-    let corr_func = bond_correlation bt in
-    float (G.foldi (fun sum coord _ -> sum + (corr_func lat.g coord)) 0 lat.g)
+    match bt with
+    | MAG ->
+      float (G.fold (fun sum site -> sum + (int_of_site site)) 0 lat.g)
+    | _ -> 
+      let corr_func = bond_correlation bt in
+      float (G.foldi (fun sum coord _ -> sum + (corr_func lat.g coord)) 0 lat.g)
 
   let energy lat =
     let energy = ref 0. in

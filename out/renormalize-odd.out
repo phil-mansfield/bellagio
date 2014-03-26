@@ -1,0 +1,14 @@
+Simulation parameters:
+     Temperature:            1.098
+          Trials:          1000000
+   Initial Width:               64
+      Bond Types: [MAG]
+    Interactions: [(SQR, 1)]
+Eigenvalue exponent for dK_n+1/dK_n:
+(We want values close to 1.)
+Renormalizations              y_T
+           -----          1.87532
+           -----          1.86886
+           -----          1.86986
+           -----          1.87063
+Rough execution estimate: 5916.17 seconds :(

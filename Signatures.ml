@@ -108,7 +108,7 @@ module type MCARLO =
 sig
   type lattice
   type histogram
-  type bond_type = NN1 | NN2 | NN3 | DMD | SQR
+  type bond_type = NN1 | NN2 | NN3 | DMD | SQR | MAG
   type normalize_type = Random2By2 | InPlace2By2 | InPlace3By3
 
   val init : int -> lattice

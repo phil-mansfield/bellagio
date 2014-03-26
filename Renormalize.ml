@@ -7,13 +7,13 @@ module Hist = Histogram.ArrayHistogram
 module MC = MCarlo.MakeSwendsenWang(Hist)
 
 (* Compile-time simulation parameters *)
-let eq_sweeps = 100
-let interactions = [| (MC.NN1, 1.0) |]
-let min_site_width = 2
+let interactions = [| (MC.SQR, 1.0) |]
+let min_site_width = 4
 
 (* Fixed and derived simulation parameters. *)
-let bts = [| MC.NN1; MC.NN2; MC.NN3; MC.SQR; MC.DMD |]
-let bt_count = Array.length interactions
+(* let bts = [| MC.NN1; MC.NN2; MC.NN3; MC.SQR; MC.DMD |] *)
+let bts = [| MC.MAG |]
+let bt_count = Array.length bts
 let min_site_count = min_site_width * min_site_width
 let nn_crit_temp = 1. /. (log (1. +. sqrt 2.))
 
@@ -21,18 +21,21 @@ let nn_crit_temp = 1. /. (log (1. +. sqrt 2.))
 let _ = assert (Array.length Sys.argv > 2)
 let width = int_of_string Sys.argv.(1) 
 let trials = int_of_string Sys.argv.(2) 
-let temp = if Array.length Sys.argv = 3 then nn_crit_temp 
-  else float_of_string (Sys.argv.(3))
+let temp = if Array.length Sys.argv = 3 then 
+    nn_crit_temp 
+  else
+    float_of_string (Sys.argv.(3))
     
 (* Print-out. *)
 let print_parameters () =
   let string_of_bt bt =
     match bt with
-      MC.NN1 -> "NN1"
+    | MC.NN1 -> "NN1"
     | MC.NN2 -> "NN2"
     | MC.NN3 -> "NN3"
     | MC.SQR -> "SQR"
     | MC.DMD -> "DMD"
+    | MC.MAG -> "MAG"
   in
   let print_bt bt = 
     print_string (string_of_bt bt) 
@@ -53,6 +56,8 @@ let print_parameters () =
   Utils.print_list print_interaction (Array.to_list interactions);
   Printf.printf "\n"
 
+(* Counts the maximum number of renormalizations that can be done
+ * givent he sim parameters. *)
 let count_renorms () = 
   let renorms = ref 0 in
   let width' = ref width in
@@ -62,6 +67,8 @@ let count_renorms () =
   done;
   !renorms - 1
 
+(* Creates and arraycontaining the correlation values of the given lattice
+ * for the parameter-specified interactions. *)
 let corr_array lat =
   Array.init bt_count (fun i -> MC.correlation lat bts.(i))
 
@@ -94,6 +101,11 @@ let update_all_samesies sum_array1s sum_array2s sqr_mats lat =
     update_sum_and_sqr sum_array1s.(i) sum_array2s.(i) sqr_mats.(i) corr corr;
   done
 
+(* Calculates the T_ab matrix. T_ab is dK_a^(n+1) / dK_b^(n), that is to say, the
+ * derivative of the interaction constants of the more renormalized lattice with
+ * respect to the interaction constants of the less renormalized lattice. This is
+ * done by creating the matrices M(n, n+1) and M(n+1, n+1) where M(a, b) is
+ * defined as dS^(a)/dK^(b). We calculate this derivative by finding *)
 let calc_t_ab sum_array1 sum_array2 sqr_mat trials =
   let t_ab = Array.make (bt_count * bt_count) 0. in
   let n = float trials in
@@ -160,6 +172,8 @@ let extract_max_eigen (t_ab_stag, t_ab_same) =
     let {Complex.re = re; im = im} = eval.{i} in
     if re > !max then max := re
   done;
+  Printf.printf "%16s %16g" "-----" (log (!max) /. log 2.);
+  print_newline ();
   !max
 ;;
 
@@ -172,18 +186,16 @@ let main () =
   MC.set_temp lat temp;
   MC.set_bond_types lat interactions;
 
-  for i=0 to eq_sweeps do
+  (* Equalization. *)
+  for i=0 to trials do
     MC.sweep lat
   done;
 
   let t_abs = calc_t_abs lat trials in
-  let eigens = Array.map extract_max_eigen t_abs in
   Printf.printf "Eigenvalue exponent for dK_n+1/dK_n:\n";
   Printf.printf "(We want values close to 1.)\n";
   Printf.printf "%16s %16s\n" "Renormalizations" "y_T";
-  for renorm=1 to Array.length eigens do
-    Printf.printf "%16d %16g\n" renorm (log (eigens.(renorm - 1)) /. log 2.)
-  done;
+  let _ = Array.map extract_max_eigen t_abs in
   Printf.printf "Rough execution estimate: %g seconds :(\n" (Sys.time ());
 ;;
 
